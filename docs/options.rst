@@ -142,8 +142,8 @@ Array of date strings or a single date string formatted in the given date format
 
 .. _datesHighlighted
 
-datesHighlighlighted
---------------------
+datesHighlighted
+----------------
 
 String, Array. Default: []
 
