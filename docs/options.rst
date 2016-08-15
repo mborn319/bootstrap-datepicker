@@ -140,6 +140,15 @@ String, Array.  Default: []
 
 Array of date strings or a single date string formatted in the given date format
 
+.. _datesHighlighted
+
+datesHighlighlighted
+--------------------
+
+String, Array. Default: []
+
+Array of date strings or a single date string formatted in the given date format.
+
 .. _daysOfWeekDisabled:
 
 

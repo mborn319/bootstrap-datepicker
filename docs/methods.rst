@@ -220,3 +220,14 @@ Arguments:
 Sets the days of week that should be highlighted.  See :ref:`daysOfWeekHighlighted` for valid values.
 
 Omit daysOfWeekHighlighted (or provide an otherwise falsey value) to unset the highlighted days of week.
+
+setDatesHighlighted
+-------------------
+
+Arguments:
+
+* datesHighlighted (String|Array)
+
+Sets a particular date or set of dates that should be highlighted. See :ref:`datesHighlighted` for valid values.
+
+Omit datesHighlighted (or provide an otherwise falsey value) to unset the highlighted dates.
