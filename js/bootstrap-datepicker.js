@@ -155,6 +155,7 @@
 		this.setDaysOfWeekDisabled(this.o.daysOfWeekDisabled);
 		this.setDaysOfWeekHighlighted(this.o.daysOfWeekHighlighted);
 		this.setDatesDisabled(this.o.datesDisabled);
+    this.setDatesHighlighted(this.o.datesHighlighted);
 
 		this.setViewMode(this.o.startView);
 		this.fillDow();
@@ -277,6 +278,14 @@
 			o.datesDisabled = $.map(o.datesDisabled, function(d){
 				return DPGlobal.parseDate(d, format, o.language, o.assumeNearbyYear);
 			});
+
+      o.datesHighlighted = o.datesHighlighted||[];
+      if (!$.isArray(o.datesHighlighted)) {
+        o.datesHighlighted = o.datesHighlighted.split(',');
+      }
+      o.datesHighlighted = $.map(o.datesHighlighted, function(d){
+        return DPGlobal.parseDate(d, format, o.language, o.assumeNearbyYear);
+      });
 
 			var plc = String(o.orientation).toLowerCase().split(/\s+/g),
 				_plc = o.orientation.toLowerCase();
@@ -647,6 +656,12 @@
 			return this;
 		},
 
+    setDatesHighlighted: function(datesHighlighted){
+      this._process_options({datesHighlighted: datesHighlighted});
+      this.update();
+      return this;
+    },
+
 		place: function(){
 			if (this.isInline)
 				return this;
@@ -864,6 +879,10 @@
 			if ($.inArray(date.getUTCDay(), this.o.daysOfWeekHighlighted) !== -1){
 				cls.push('highlighted');
 			}
+
+      if (this.dateIsHighlighted(date)){
+        cls.push('highlighted');
+      }
 
 			if (this.range){
 				if (date > this.range[0] && date < this.range[this.range.length-1]){
@@ -1378,6 +1397,12 @@
 			);
 		},
 
+    dateIsHighlighted: function(date) {
+      return $.grep(this.o.datesHighlighted, function(d){
+        return isUTCEquals(date, d);
+      }).length > 0
+    },
+
 		dateWithinRange: function(date){
 			return date >= this.o.startDate && date <= this.o.endDate;
 		},
@@ -1672,6 +1697,7 @@
 		daysOfWeekDisabled: [],
 		daysOfWeekHighlighted: [],
 		datesDisabled: [],
+    datesHighlighted: [],
 		endDate: Infinity,
 		forceParse: true,
 		format: 'mm/dd/yyyy',
